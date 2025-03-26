@@ -1,0 +1,14 @@
+[
+  {
+    "email": "nihad@gmail.com",
+    "username": "Nihad Hodzic",
+    "password": "password123",
+    "rola": "korisnik"
+  },
+  {
+    "email": "edin@gmail.com",
+    "username": "Edin Avdukic",
+    "password": "password321",
+    "rola": "taxi"
+  }
+]
