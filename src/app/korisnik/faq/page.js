@@ -11,8 +11,8 @@ export default function Faq() {
         <h1 className="flex justify-center py-6 text-2xl">
           Često postavljena pitanja
         </h1>
-        <div className="px-4">
-          <div className="collapse bg-base-200">
+        <div className="px-4 bg-gray-900">
+          <div className="collapse bg-gray-900">
             <input type="radio" name="my-accordion-1" defaultChecked />
             <div className="collapse-title text-xl font-medium">
               Kako mogu naručiti taxi bez prijave?
@@ -26,7 +26,7 @@ export default function Faq() {
               </p>
             </div>
           </div>
-          <div className="collapse bg-base-200">
+          <div className="collapse bg-gray-900">
             <input type="radio" name="my-accordion-1" />
             <div className="collapse-title text-xl font-medium">
               Kako mogu platiti vožnju?
@@ -39,7 +39,7 @@ export default function Faq() {
               </p>
             </div>
           </div>
-          <div className="collapse bg-base-200">
+          <div className="collapse bg-gray-900">
             <input type="radio" name="my-accordion-1" />
             <div className="collapse-title text-xl font-medium">
               Kako mogu ocijeniti vozača ili putnika?
@@ -53,7 +53,7 @@ export default function Faq() {
             </div>
           </div>
 
-          <div className="collapse bg-base-200">
+          <div className="collapse bg-gray-900">
             <input type="radio" name="my-accordion-1" />
             <div className="collapse-title text-xl font-medium">
               Što učiniti ako izgubim predmet u vozilu?
@@ -67,7 +67,7 @@ export default function Faq() {
             </div>
           </div>
 
-          <div className="collapse bg-base-200">
+          <div className="collapse bg-gray-900">
             <input type="radio" name="my-accordion-1" />
             <div className="collapse-title text-xl font-medium">
               Kako mogu postati vozač u aplikaciji?

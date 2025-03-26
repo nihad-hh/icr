@@ -19,9 +19,10 @@ export default function Navbar() {
     <div className="navbar bg-base-100 z-10 bg-gray-200">
       <div className="navbar-start">
         <div className="dropdown">
-          <details className="dropdown">
-            <summary className="btn m-1 bg-white"> {/*Ovdje dodaj za boju navigacijske kutije*/}
+          <details className="dropdown ">
+            <summary className="btn m-1 bg-white">
               {" "}
+              {/*Ovdje dodaj za boju navigacijske kutije*/}{" "}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -37,7 +38,7 @@ export default function Navbar() {
                 />
               </svg>
             </summary>
-            <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+            <ul className="menu dropdown-content rounded-box z-[1] w-52 p-2 shadow bg-gray-900">
               <li>
                 {currentUser != "None" && (
                   <Link
@@ -105,18 +106,19 @@ export default function Navbar() {
           </details>
         </div>
       </div>
-        
+
       <div className="navbar-center bg-gray-200">
-            <a
-              className="btn btn-ghost text-4xl text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-white to-yellow-400"
-              style={{
-                backgroundImage: "linear-gradient(45deg, #2D2D2D 30%, #fcd34d 40%, #2D2D2D 45%, #fcd34d 49%, #2D2D2D 60%)",
-              }}
-            >
-              JaBiHTaxi
-            </a>
-            </div>
-            <div className="navbar-end">
+        <a
+          className="btn btn-ghost text-4xl text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-white to-yellow-400"
+          style={{
+            backgroundImage:
+              "linear-gradient(45deg, #2D2D2D 30%, #fcd34d 40%, #2D2D2D 45%, #fcd34d 49%, #2D2D2D 60%)",
+          }}
+        >
+          JaBiHTaxi
+        </a>
+      </div>
+      <div className="navbar-end">
         {/* <button className="btn btn-ghost btn-circle">
           <svg
             xmlns="http://www.w3.org/2000/svg"

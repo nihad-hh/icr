@@ -29,7 +29,7 @@ export default function Home() {
             Želim da podijelim:
           </span>
           <select
-            className="select select-warning w-full max-w-xs"
+            className="select select-warning w-full max-w-xs bg-white text-gray-900"
             defaultValue="Odaberi način plaćanja"
           >
             <option value="Problem u aplikaciji">Problem u aplikaciji</option>
@@ -45,7 +45,7 @@ export default function Home() {
       </div>
       <div className="flex min-w-[480px] flex-col mx-2">
         <textarea
-          className="textarea textarea-warning h-64"
+          className="textarea textarea-warning h-64 bg-white"
           placeholder="Ono što želim da podijelim"
         ></textarea>
       </div>

@@ -27,9 +27,7 @@ export default function PutnikProfil() {
   function createDostupneVoznje(voznje) {
     return (
       <>
-        <tbody
-        className="text-white">
-          
+        <tbody className="text-white">
           {voznje.map((row) => (
             <tr key={row.id}>
               <td>
@@ -50,7 +48,7 @@ export default function PutnikProfil() {
         </tbody>
 
         <dialog id="my_modal_3" className="modal">
-          <div className="modal-box w-[450px]">
+          <div className="modal-box w-[450px] bg-gray-900">
             <form method="dialog">
               <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
                 ✕
@@ -58,8 +56,8 @@ export default function PutnikProfil() {
             </form>
             <div className="w-full flex justify-center flex-col text-gray-400">
               <table className="table table-pin-rows z-0 my-6">
-                <thead className="text-gray-500">
-                  <tr>
+                <thead>
+                  <tr className="bg-gray-200 text-gray-900">
                     <th>Datum i vrijeme</th>
                     <th>Polazište</th>
                     <th>Odredište</th>
@@ -93,8 +91,7 @@ export default function PutnikProfil() {
   function createRezervisaneVoznje(voznje) {
     return (
       <>
-        <tbody
-        className="text-white">
+        <tbody className="text-white">
           {voznje.map((row) => (
             <tr key={row.id}>
               <td>
@@ -128,7 +125,7 @@ export default function PutnikProfil() {
         </tbody>
 
         <dialog id="my_modal_4" className="modal">
-          <div className="modal-box w-[450px]">
+          <div className="modal-box w-[450px] bg-gray-900">
             <form method="dialog">
               <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
                 ✕
@@ -136,8 +133,8 @@ export default function PutnikProfil() {
             </form>
             <div className="w-full flex justify-center flex-col text-gray-400">
               <table className="table table-pin-rows z-0 my-6">
-                <thead className="text-gray-500">
-                  <tr>
+                <thead>
+                  <tr className="bg-gray-200 text-gray-900">
                     <th>Datum i vrijeme</th>
                     <th>Polazište</th>
                     <th>Odredište</th>
@@ -209,7 +206,7 @@ export default function PutnikProfil() {
 
       {/* allow location access  */}
       <dialog id="my_modal_5" className="modal">
-        <div className="modal-box w-[450px]">
+        <div className="modal-box w-[450px] bg-gray-900">
           <form method="dialog">
             <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
               ✕
@@ -238,7 +235,7 @@ export default function PutnikProfil() {
       </dialog>
 
       <div className="w-full flex justify-center h-12">
-        <div className="flex space-x-4 px-4 py-6 text-yellow-500">
+        <div className="flex space-x-4 px-4 py-4 text-yellow-500">
           <svg
             class="w-6 h-6 text-gray-800 dark:text-white"
             aria-hidden="true"
@@ -260,20 +257,17 @@ export default function PutnikProfil() {
         </div>
       </div>
 
-      <div className="flex w-full flex-col h-6">
-        <div className="divider"></div>
-      </div>
-      <div className="w-full flex justify-center"></div>
-      
-      <hr class="border-t-4 border-gray-200 my-0" />
+      <hr class="border-t-4 border-gray-200 my-2" />
 
-      <div className="overflow-auto" style={{ maxHeight: '276px' }}>
+      <div className="w-full flex justify-center">
+        <caption className="text-yellow-400 text-lg font-bold m-2">
+          Dostupne vožnje
+        </caption>
+      </div>
+      <div className="overflow-auto" style={{ maxHeight: "276px" }}>
         <table className="table table-pin-rows z-0 text-white">
-          <caption className="text-yellow-400 text-lg font-bold p-2">
-            Dostupne vožnje
-          </caption>
           <thead>
-            <tr className="bg-gray-200 text-gray-500">
+            <tr className="bg-gray-200 text-gray-900">
               <th className="text-center">Datum i vrijeme</th>
               <th className="text-center">Polazište</th>
               <th className="text-center">Odredište</th>
@@ -282,17 +276,19 @@ export default function PutnikProfil() {
           </thead>
           {dostupneVoznjeJSX}
         </table>
-      </div> 
-      
+      </div>
+
       <hr class="border-t-4 border-gray-200 my-0" />
 
-      <div className="overflow-auto" style={{ maxHeight: '276px' }}>
+      <div className="w-full flex justify-center">
+        <caption className="text-yellow-400 text-lg font-bold p-2">
+          Rezervisane vožnje
+        </caption>
+      </div>
+      <div className="overflow-auto" style={{ maxHeight: "276px" }}>
         <table className="table table-pin-rows z-0 text-white">
-          <caption className="text-yellow-400 text-lg font-bold p-2">
-            Rezervisane vožnje
-          </caption>
           <thead>
-            <tr className="bg-gray-200 text-gray-500">
+            <tr className="bg-gray-200 text-gray-900">
               <th className="text-center">Datum i vrijeme</th>
               <th className="text-center">Polazište</th>
               <th className="text-center">Odredište</th>
@@ -306,13 +302,15 @@ export default function PutnikProfil() {
 
       <hr class="border-t-4 border-gray-200 my-0" />
 
-      <div className="overflow-auto" style={{ maxHeight: '276px' }}>
+      <div className="w-full flex justify-center">
+        <caption className="text-yellow-400 text-lg font-bold p-2">
+          Završene vožnje
+        </caption>
+      </div>
+      <div className="overflow-auto" style={{ maxHeight: "276px" }}>
         <table className="table table-pin-rows z-0 text-white">
-          <caption className="text-yellow-400 text-lg font-bold p-2">
-            Završene vožnje
-          </caption>
           <thead>
-            <tr className="bg-gray-200 text-gray-500">
+            <tr className="bg-gray-200 text-gray-900">
               <th className="text-center">Datum i vrijeme</th>
               <th className="text-center">Polazište</th>
               <th className="text-center">Odredište</th>

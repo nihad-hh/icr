@@ -46,7 +46,7 @@ export default function PutnikProfil() {
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="rgb(255, 204, 0)"
-                  className="size-6"
+                  className="size-6 bg-gray-900"
                 >
                   <path
                     strokeLinecap="round"
@@ -60,7 +60,7 @@ export default function PutnikProfil() {
         </tbody>
 
         <dialog id="my_modal_4" className="modal">
-          <div className="modal-box">
+          <div className="modal-box bg-gray-900">
             <form method="dialog">
               <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
                 ✕
@@ -69,7 +69,7 @@ export default function PutnikProfil() {
             <div className="w-full flex justify-center flex-col text-gray-400">
               <table className="table table-pin-rows z-0 my-6">
                 <thead className="text-gray-500">
-                  <tr>
+                  <tr className="bg-gray-200 text-gray-900">
                     <th>Datum i vrijeme</th>
                     <th>Polazište</th>
                     <th>Odredište</th>
@@ -144,14 +144,14 @@ export default function PutnikProfil() {
         </div>
       </div>
       <hr class="border-t-4 border-gray-200 my-0" />
-    
-      <div className="overflow-auto" style={{ maxHeight: '276px' }}>
+
+      <div className="overflow-auto" style={{ maxHeight: "276px" }}>
         <table className="table table-pin-rows z-0 text-white">
           <caption className="text-yellow-400 text-lg font-bold p-2">
             Prethodno završene vožnje
           </caption>
           <thead>
-            <tr className="bg-gray-200">
+            <tr className="bg-gray-200 text-gray-900">
               <th>Datum i vrijeme</th>
               <th>Polazište</th>
               <th>Odredište</th>
@@ -162,30 +162,29 @@ export default function PutnikProfil() {
         </table>
       </div>
 
+      <hr class="border-t-4 border-gray-200 my-0" />
 
-<hr class="border-t-4 border-gray-200 my-0" />
-      
-      <div className="overflow-auto" style={{ maxHeight: '276px' }}>
-  <table id="tRezervisaneVoznje" className="table table-pin-rows text-white">
-    <caption className="text-yellow-400 text-lg font-bold p-2">
-      Rezervisane vožnje
-    </caption>
-    <thead>
-      <tr className="bg-gray-200">
-        <th>Datum i vrijeme</th>
-        <th>Polazište</th>
-        <th>Odredište</th>
-        <th>Cijena</th>
-        <th>Otkaži</th>
-      </tr>
-    </thead>
-    {rezervisaneVoznjeJSX}
-  </table>
-</div>
-<hr class="border-t-4 border-gray-200 my-0" />
-<div className="flex justify-center items-center">
-  <img src="/taxi_slika.png" alt="Logo" className="h-28 w-auto" />
-</div>
+      <div className="overflow-auto" style={{ maxHeight: "276px" }}>
+        <table
+          id="tRezervisaneVoznje"
+          className="table table-pin-rows text-white"
+        >
+          <caption className="text-yellow-400 text-lg font-bold p-2">
+            Rezervisane vožnje
+          </caption>
+          <thead>
+            <tr className="bg-gray-200 text-gray-900">
+              <th>Datum i vrijeme</th>
+              <th>Polazište</th>
+              <th>Odredište</th>
+              <th>Cijena</th>
+              <th>Otkaži</th>
+            </tr>
+          </thead>
+          {rezervisaneVoznjeJSX}
+        </table>
+      </div>
+      <hr class="border-t-4 border-gray-200 my-0" />
     </div>
   );
 }

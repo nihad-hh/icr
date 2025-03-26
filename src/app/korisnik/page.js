@@ -47,7 +47,6 @@ export default function Home() {
     localStorage.setItem("dijeljenjeVoznje", event.target.value);
   };
 
-
   function loadData(key) {
     let data = localStorage.getItem(key);
 
@@ -86,8 +85,11 @@ export default function Home() {
       clearTimeout(timeoutPrihvatanjeVoznje);
       timeoutPrihvatanjeVoznje = null;
     }
+    localStorage.setItem("tipVoznje", "Odmah");
+    setTipVoznje("Odmah");
     localStorage.setItem("stanje", 0);
     setStanje(0);
+
     setStatusTaxija("Čeka se odgovor taxija");
   };
 
@@ -109,7 +111,7 @@ export default function Home() {
   const [startDate, setStartDate] = useState(new Date());
   const ExampleCustomInput = forwardRef(
     ({ value, onClick, className }, ref) => (
-      <button className={className} onClick={onClick} ref={ref}>
+      <button className="bg-gray-800" onClick={onClick} ref={ref}>
         {value}
       </button>
     )
@@ -157,6 +159,8 @@ export default function Home() {
   const handlePovratak = () => {
     window.location.href = "/korisnik";
 
+    localStorage.setItem("tipVoznje", "Odmah");
+    setTipVoznje("Odmah");
     localStorage.setItem("stanje", 0);
     localStorage.setItem("polaziste", "Najcesce polaziste");
     localStorage.setItem("odrediste", "Najcesce odrediste");
@@ -217,13 +221,12 @@ export default function Home() {
     }
   };
 
-
   return (
     <>
       <Navbar />
       {/* allow location access  */}
       <dialog id="my_modal_4" className="modal">
-        <div className="modal-box w-[450px]">
+        <div className="modal-box w-[450px] bg-gray-900">
           <form method="dialog">
             <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
               ✕
@@ -253,539 +256,552 @@ export default function Home() {
           </div>
         </div>
       </dialog>
-    <div style={{ marginTop: '1cm' }}>
-      {/* Odabir polazišta */}
-      {stanje == 0 ? (
-        <div className="w-full flex justify-center">
-          <Link
-            href={{
-              pathname: "/korisnik/polaziste",
-            }}
-          >
-            <button className="my-5">Odaberi polazište</button>
-          </Link>
-        </div>
-      ) : null}
 
-      {/* Adresa polazišta */}
-      {stanje < 3 && (
-        <div className="w-full flex justify-center">
-          <div className="flex space-x-4 p-4">
-            <span className="bg-black text-yellow-400 px-4 py-2 rounded bg-gray-800">
-              Polazište:
-            </span>
-            <span className="px-4 py-2 rounded min-w-32 text-white bg-gray-800">
-              {loadData("polaziste")}
-            </span>
+      <div style={{ marginTop: "1cm" }}>
+        {/* Odabir polazišta */}
+        {stanje == 0 ? (
+          <div className="w-full flex justify-center">
+            <Link
+              href={{
+                pathname: "/korisnik/polaziste",
+              }}
+            >
+              <button className="my-5">Odaberi polazište</button>
+            </Link>
           </div>
-        </div>
-      )}
-      {/* Odabir odredišta */}
-      {stanje == 0 ? (
-        <div className="w-full flex justify-center">
-          <Link
-            href={{
-              pathname: "/korisnik/odrediste",
-            }}
-          >
-            <button className="my-5">Odaberi odredište</button>
-          </Link>
-        </div>
-      ) : null}
-      {/* Adresa odredišta */}
-      {stanje < 3 && (
-        <div className="w-full flex justify-center">
-          <div className="flex space-x-4 p-4">
-            <span className="bg-black text-yellow-400 px-4 py-2 rounded bg-gray-800">
-              Odredište:
-            </span>
-            <span className="px-4 py-2 rounded min-w-32 max-w-48 text-wrap text-white bg-gray-800">
-              {loadData("odrediste")}
-            </span>
+        ) : null}
+
+        {/* Adresa polazišta */}
+        {stanje < 3 && (
+          <div className="w-full flex justify-center">
+            <div className="flex space-x-4 p-4">
+              <span className="bg-black text-yellow-400 px-4 py-2 rounded bg-gray-800">
+                Polazište:
+              </span>
+              <span className="px-4 py-2 rounded min-w-32 text-white bg-gray-800">
+                {loadData("polaziste")}
+              </span>
+            </div>
           </div>
-          {stanje == 2 && (
+        )}
+        {/* Odabir odredišta */}
+        {stanje == 0 ? (
+          <div className="w-full flex justify-center">
             <Link
               href={{
                 pathname: "/korisnik/odrediste",
               }}
             >
-              <button className="my-4">Promijeni</button>
+              <button className="my-5">Odaberi odredište</button>
             </Link>
-          )}
-        </div>
-      )}
-      {stanje == 2 && tipVoznje == "Odmah" && (
-        <div className="w-full flex justify-center">
-          <button className="mt-4 error-button" onClick={stateToZero}>
-            Otkaži taxi
-          </button>
-        </div>
-      )}
-      {/* Dijeljenje vožnje */}
-      {stanje < 1 && (
-        <div className="w-full flex pl-[60px]">
-          <div className="flex items-center space-x-4 p-4">
-            <span className="bg-black text-yellow-400 px-4 py-2 rounded bg-gray-800 text-center">
-              Dijeljenje vožnje:
-            </span>
-
-            <div className="flex items-center gap-2">
-              <label htmlFor="Ne" className="text-white">Ne</label>
-              <input
-                type="radio"
-                name="radio-6"
-                className="radio radio-warning"
-                id="Ne"
-                onChange={handleChangeDijeljenje}
-                disabled={stanje > 2} 
-                defaultChecked
-                value="Ne"
-              />
-            </div>
-
-            <div className="flex items-center gap-2">
-              <label htmlFor="Da" className="text-white">Da</label>
-              <input
-                type="radio"
-                id="Da"
-                name="radio-6"
-                className="radio radio-warning"
-                disabled={stanje > 2} 
-                onChange={handleChangeDijeljenje}
-                value="Da"
-              />
-            </div>
           </div>
-        </div>
-      )}
-      {/* Tip vožnje */}
-      {stanje < 1 && (
-        <div className="w-full flex pl-[60px]">
-          <div className="flex items-center space-x-4 p-4">
-            <span className="bg-black text-yellow-400 px-4 py-2 rounded bg-gray-800 text-center">
-              Tip vožnje:
-            </span>
+        ) : null}
+        {/* Adresa odredišta */}
 
-            <div className="flex items-center gap-2">
-              <label htmlFor="Odmah" className="text-white">Odmah</label>
-              <input
-                type="radio"
-                name="radio-tip"
-                className="radio radio-warning"
-                id="Odmah"
-                onChange={handleChangeTip}
-                disabled={stanje > 2} 
-                defaultChecked
-                value="Odmah"
-              />
-            </div>
-
-            <div className="flex items-center gap-2">
-              <label htmlFor="Rezervacija" className="text-white">Rezervacija</label>
-              <input
-                type="radio"
-                id="Rezervacija"
-                name="radio-tip"
-                className="radio radio-warning"
-                disabled={stanje > 2} 
-                onChange={handleChangeTip}
-                value="Rezervacija"
-              />
-            </div>
-          </div>
-        </div>
-      )}
-      <div className="w-full h-full flex items-center justify-center">
-      <div className="grid grid-cols-2 gap-4 p-4 items-center">
-        {(stanje == 1 || stanje == 1.5) && (
-          <div className="flex items-center space-x-4">
-            <span className="text-yellow-400 px-4 py-2 rounded bg-gray-800">
-              Dijeljenje:
-            </span>
-            <span className="px-4 py-2 rounded min-w-20 text-white bg-gray-800 flex items-center justify-center">
-              {dijeljenjeVoznje}
-            </span>
-          </div>
-        )}
-        {(stanje == 1 || stanje == 1.5) && (
-          <div className="flex items-center space-x-4">
-            <span className="text-yellow-400 px-4 py-2 rounded bg-gray-800">
-              Tip:
-            </span>
-            <span className="px-4 py-2 rounded min-w-20 text-white bg-gray-800 flex items-center justify-center">
-              {tipVoznje}
-            </span>
-          </div>
-        )}
-      </div>
-    </div>
-
-
-      {/* Date Picker */}
-{tipVoznje === "Rezervacija" && (
-  <>
-    <div className="w-full flex pl-[190px] z-10 mt-0"> {/* Reduced margin-top */}
-      <div className="flex space-x-4 p-2"> {/* Reduced padding */}
-        <span className="bg-black text-yellow-400 px-4 py-2 rounded bg-gray-800">
-          Datum:
-        </span>
-        <DatePicker
-          className="bg-yellow"
-          selected={startDate}
-          onChange={(date) => setStartDate(date)}
-          disabled={stanje != 0}
-          customInput={
-            <ExampleCustomInput className="example-custom-input" />
-          }
-        />
-      </div>
-    </div>
-    <div className="w-full flex pl-[190px] mt-2"> {/* Reduced margin-top */}
-      <div className="flex space-x-4 p-2"> {/* Reduced padding */}
-        <span className="text-yellow-400 px-4 py-2 rounded bg-gray-800">
-          Vrijeme:
-        </span>
-        <input
-          disabled={stanje != 0}
-          className="bg-gray-800 text-white"
-          aria-label="Time"
-          type="time"
-          value={vrijeme}
-          onChange={(event) => {
-            console.log(event.target.value);
-            setVrijeme(event.target.value);
-          }}
-        />
-      </div>
-    </div>
-  </>
-)}
-
-
-      {/* Status taxija */}
-      {(stanje == 2 || stanje == 1.5 || stanje == 1) && (
-        <>
-          <div className="mt-4">
-            <div className="w-full flex justify-center">
-              <span className="bg-black text-yellow-400 px-4 py-2 rounded">
-                Status:
-              </span>
-              <span className="text-yellow-500 border-2 border-yellow-500 px-4 py-2 rounded">
-                {statusTaxija}
-              </span>
-            </div>
-          </div>
-        </>
-      )}
-      {/* Reg. oznake i cijena vožnje*/}
-      {(stanje == 2 || stanje == 1.5) && (
-        <div className="w-full flex justify-center py-4">
-          {tipVoznje == "Odmah" && (
-            <div className="flex p-2">
-              <span className="bg-black text-yellow-500 px-2 py-2 rounded">
-                Reg. oznake:
-              </span>
-              <span className="text-yellow-500 border-2 border-yellow-500 px-4 py-2 rounded">
-                A02-K-521
-              </span>
-            </div>
-          )}
-          {tipVoznje == "Rezervacija" && (
-            <div className="flex p-2">
-              <span className="bg-black text-yellow-500 px-2 py-2 rounded">
-                Trajanje vožnje:
-              </span>
-              <span className="text-yellow-500 border-2 border-yellow-500 px-4 py-2 rounded">
-                15 min
-              </span>
-            </div>
-          )}
-          <div className="flex p-2">
-            <span className="bg-black text-yellow-500 px-2 py-2 rounded">
-              Procijenjena cijena:
-            </span>
-            <span className="text-yellow-500 border-2 border-yellow-500 px-4 py-2 rounded">
-              21 KM
-            </span>
-          </div>
-        </div>
-      )}
-      {/* Procijenjeno vrijeme dolaska taxija */}
-      {(stanje == 2 || stanje == 1.5) && tipVoznje == "Odmah" && (
-        <div className="w-full flex px-10">
-          <div className="flex space-x-4 p-2">
-            <span className="text-yellow-400 px-4 py-2 rounded bg-gray-800">
-              Procijenjeno vrijeme dolaska:
-            </span>
-            <span className="text-yellow-400 border-1 border-yellow-500 px-4 py-2 rounded bg-gray-800">
-              5 minuta
-            </span>
-          </div>
-        </div>
-      )}
-      {/* Procijenjeno vrijeme do odredišta */}
-      {(stanje == 2 || stanje == 1.5) && tipVoznje == "Odmah" && (
-        <div className="w-full flex justify-center">
-          <div className="flex space-x-4 p-4">
-            <span className="text-yellow-400 px-4 py-2 rounded bg-gray-800">
-              Procijenjeno vrijeme do odredišta:
-            </span>
-            <span className="text-yellow-400 border-1 border-yellow-400 px-4 py-2 rounded bg-gray-800">
-              20 minuta
-            </span>
-          </div>
-        </div>
-      )}
-      {/* Naruci taxi button */}
-      {stanje == 0 && (
-        <div className="w-full flex justify-center mt-[20px]">
-          <button className="" onClick={stateToOne}>
-            Nađi taxi
-          </button>
-        </div>
-      )}
-      {/* Tekst o neispravnom unosu */}
-      {stanje == 0 && !inputValid && (
-        <div className="w-full flex justify-center py-4">
-          <span className="text-red-500">Molimo unesite podatke.</span>
-        </div>
-      )}
-      {/* Otkazi voznju */}
-      {stanje == 1 && (
-        <>
+        {stanje < 3 && (
           <div className="w-full flex justify-center">
-            <button className="my-5 error-button" onClick={stateToZero}>
-              Otkaži vožnju
-            </button>
-          </div>
-        </>
-      )}
-      {/* Prihvati voznju konačno*/}
-      {stanje == 1.5 && (
-        <>
-          <div className="w-full flex justify-center space-x-10">
-            <div
-              className="my-4 tooltip tooltip-open tooltip-error tooltip-bottom z-0"
-              data-tip="Prihvatanje vožnje plaćate sa 2 kredita"
-            >
-              <button className="my-5" onClick={stateToTwo}>
-                Prihvati vožnju
-              </button>
+            <div className="flex space-x-4 p-4">
+              <span className="bg-black text-yellow-400 px-4 py-2 rounded bg-gray-800">
+                Odredište:
+              </span>
+              <span className="px-4 py-2 rounded min-w-32 max-w-48 text-wrap text-white bg-gray-800">
+                {loadData("odrediste")}
+              </span>
             </div>
-            <button className="mx-5 my-9 error-button" onClick={stateToZero}>
-              Otkaži vožnju
-            </button>
+            {stanje == 2 && (
+              <Link
+                href={{
+                  pathname: "/korisnik/odrediste",
+                }}
+              >
+                <button className="my-4">Promijeni</button>
+              </Link>
+            )}
           </div>
-        </>
-      )}
-      {/* Trenutna lokacija taxija button */}
-      {stanje == 2 && tipVoznje == "Odmah" && (
-        <div className="w-full flex justify-center items-center">
-          <Link href="/korisnik/taxi-trenutna-lokacija">
-            <button className="my-5 flex items-center space-x-2 bg-[#fcd34d] text-[#212121] px-4 py-2 rounded cursor-pointer font-bold transition-all duration-300 ease-in-out">
-              <span>Trenutna lokacija taxija</span>
-            </button>
-          </Link>
-          {/* Add Taxi Logo next to the button */}
-          <img
-            src="/taxi_slika.png"  // Replace with the actual path to your logo
-            alt="Taxi Logo"
-            className="h-20 w-20 ml-2"  // Ensure the logo size matches the button height
-          />
-        </div>
-      )}
+        )}
 
-
-      {/* Zavrsi voznju i odabir placanja */}
-      {stanje == 2 && tipVoznje == "Odmah" && (
-        <>
-          <div className="w-full flex justify-center space-x-10">
-            <button
-              className="my-5"
-              onClick={() => document.getElementById("my_modal_3").showModal()}
-            >
-              Završi vožnju
-            </button>
-          </div>
-
-          <dialog id="my_modal_3" className="modal ">
-            <div className="modal-box w-[450px]">
-              <form method="dialog">
-                <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
-                  ✕
-                </button>
-              </form>
-              <span className="w-full flex justify-center text-yellow-500 px-2 py-2 rounded">
-                Odaberi način plaćanja:
+        {/* Dijeljenje vožnje */}
+        {stanje < 1 && (
+          <div className="w-full flex pl-[60px]">
+            <div className="flex items-center space-x-4 p-4">
+              <span className="bg-black text-yellow-400 px-4 py-2 rounded bg-gray-800 text-center">
+                Dijeljenje vožnje:
               </span>
 
-              <div className="w-full flex justify-center">
-                <button
-                  className="my-5 mx-3 btn btn-success"
-                  onClick={() => {
-                    handleOdabirPlacanja("gotovina");
-                  }}
-                >
-                  Gotovina
-                </button>
+              <div className="flex items-center gap-2">
+                <label htmlFor="Ne" className="text-white">
+                  Ne
+                </label>
+                <input
+                  type="radio"
+                  name="radio-6"
+                  className="radio radio-warning"
+                  id="Ne"
+                  onChange={handleChangeDijeljenje}
+                  disabled={stanje > 2}
+                  defaultChecked
+                  value="Ne"
+                />
+              </div>
 
-                {localStorage.getItem("currentUser") === "None" ? (
-                  " "
-                ) : (
-                  <button
-                    className="my-5 mx-3 btn btn-warning"
-                    onClick={() => {
-                      handleOdabirPlacanja("krediti");
-                    }}
-                  >
-                    Krediti u aplikaciji
-                  </button>
-                )}
-
-                <button
-                  className="my-5 mx-3 btn btn-info"
-                  onClick={() => {
-                    handleOdabirPlacanja("kartica");
-                  }}
-                >
-                  Kartica
-                </button>
+              <div className="flex items-center gap-2">
+                <label htmlFor="Da" className="text-white">
+                  Da
+                </label>
+                <input
+                  type="radio"
+                  id="Da"
+                  name="radio-6"
+                  className="radio radio-warning"
+                  disabled={stanje > 2}
+                  onChange={handleChangeDijeljenje}
+                  value="Da"
+                />
               </div>
             </div>
-          </dialog>
-        </>
-      )}
-      {/* Povratak na glavni ekran rezervacija */}
-      {stanje == 2 && tipVoznje == "Rezervacija" && (
-        <div className="w-full flex justify-center">
-          <Link href="/korisnik">
-            <button className="my-5" onClick={handlePovratak}>
-              Povratak na glavni ekran
+          </div>
+        )}
+
+        {/* Tip vožnje */}
+        {stanje < 1 && (
+          <div className="w-full flex pl-[60px]">
+            <div className="flex items-center space-x-4 p-4">
+              <span className="bg-black text-yellow-400 px-4 py-2 rounded bg-gray-800 text-center">
+                Tip vožnje:
+              </span>
+
+              <div className="flex items-center gap-2">
+                <label htmlFor="Odmah" className="text-white">
+                  Odmah
+                </label>
+                <input
+                  type="radio"
+                  name="radio-tip"
+                  className="radio radio-warning"
+                  id="Odmah"
+                  onChange={handleChangeTip}
+                  disabled={stanje > 2}
+                  defaultChecked
+                  value="Odmah"
+                />
+              </div>
+
+              <div className="flex items-center gap-2">
+                <label htmlFor="Rezervacija" className="text-white">
+                  Rezervacija
+                </label>
+                <input
+                  type="radio"
+                  id="Rezervacija"
+                  name="radio-tip"
+                  className="radio radio-warning"
+                  disabled={stanje > 2}
+                  onChange={handleChangeTip}
+                  value="Rezervacija"
+                />
+              </div>
+            </div>
+          </div>
+        )}
+        {(stanje == 1 || stanje == 1.5) && (
+          <div className="w-full h-full flex items-center justify-center">
+            <div className="grid grid-cols-2 gap-4 p-4 items-center">
+              <div className="flex items-center space-x-4">
+                <span className="text-yellow-400 px-4 py-2 rounded bg-gray-800">
+                  Dijeljenje:
+                </span>
+                <span className="px-4 py-2 rounded min-w-20 text-white bg-gray-800 flex items-center justify-center">
+                  {dijeljenjeVoznje}
+                </span>
+              </div>
+
+              <div className="flex items-center space-x-4">
+                <span className="text-yellow-400 px-4 py-2 rounded bg-gray-800">
+                  Tip:
+                </span>
+                <span className="px-4 py-2 rounded min-w-20 text-white bg-gray-800 flex items-center justify-center">
+                  {tipVoznje}
+                </span>
+              </div>
+            </div>
+          </div>
+        )}
+        {/* Date Picker */}
+        {tipVoznje === "Rezervacija" && (
+          <>
+            <div className="w-full h-full flex items-center justify-center">
+              <div className="flex space-x-4 p-2">
+                <span className="bg-black text-yellow-400 px-4 py-2 rounded bg-gray-800">
+                  Datum:
+                </span>
+                <DatePicker
+                  selected={startDate}
+                  onChange={(date) => setStartDate(date)}
+                  disabled={stanje != 0}
+                  customInput={<ExampleCustomInput className="bg-gray-800" />}
+                />
+              </div>
+            </div>
+            <div className="w-full h-full flex items-center justify-center my-3">
+              <div className="flex space-x-4 p-2">
+                <span className="text-yellow-400 px-4 py-2 rounded bg-gray-800">
+                  Vrijeme:
+                </span>
+                <input
+                  disabled={stanje != 0}
+                  className="bg-gray-800 text-white px-4"
+                  aria-label="Time"
+                  type="time"
+                  value={vrijeme}
+                  onChange={(event) => {
+                    console.log(event.target.value);
+                    setVrijeme(event.target.value);
+                  }}
+                />
+              </div>
+            </div>
+          </>
+        )}
+
+        {/* Status taxija */}
+        {(stanje == 2 || stanje == 1.5 || stanje == 1) && (
+          <>
+            <div className="w-full h-full flex items-center justify-center my-4">
+              <div className="flex items-center space-x-4">
+                <span className="text-yellow-400 px-4 py-2 rounded bg-gray-800">
+                  Status:
+                </span>
+                <span className="px-4 py-2 rounded min-w-20 text-white bg-gray-800 flex items-center justify-center">
+                  {statusTaxija}
+                </span>
+              </div>
+            </div>
+          </>
+        )}
+        {/* Reg. oznake i cijena vožnje*/}
+        {(stanje == 2 || stanje == 1.5) && (
+          <div className="w-full flex justify-center py-4">
+            {tipVoznje == "Odmah" && (
+              <div className="flex items-center space-x-2">
+                <span className="text-yellow-400 px-2 py-2 rounded bg-gray-800">
+                  Reg. oznake:
+                </span>
+                <span className="px-2 py-2 rounded min-w-20 text-white bg-gray-800 flex items-center justify-center">
+                  A02-K-521
+                </span>
+              </div>
+            )}
+            {tipVoznje == "Rezervacija" && (
+              <div className="flex">
+                <span className="text-yellow-400 px-4 py-2 rounded bg-gray-800 mx-4">
+                  Trajanje vožnje:
+                </span>
+                <span className="px-4 py-2 rounded min-w-20 text-white bg-gray-800 flex items-center justify-center">
+                  15 min
+                </span>
+              </div>
+            )}
+            <div className="flex items-center space-x-4 mx-4">
+              <span className="text-yellow-400 px-2 py-2 rounded bg-gray-800">
+                Cijena :
+              </span>
+              <span className="px-4 py-2 rounded min-w-20 text-white bg-gray-800 flex items-center justify-center">
+                21 KM
+              </span>
+            </div>
+          </div>
+        )}
+        {/* Procijenjeno vrijeme dolaska taxija */}
+        {(stanje == 2 || stanje == 1.5) && tipVoznje == "Odmah" && (
+          <div className="w-full flex px-10 my-2">
+            <div className="flex space-x-4 p-2">
+              <span className="text-yellow-400 px-4 py-2 rounded bg-gray-800">
+                Procijenjeno vrijeme dolaska:
+              </span>
+              <span className="text-white border-1 border-yellow-500 px-4 py-2 rounded bg-gray-800">
+                5 minuta
+              </span>
+            </div>
+          </div>
+        )}
+        {/* Procijenjeno vrijeme do odredišta */}
+        {(stanje == 2 || stanje == 1.5) && tipVoznje == "Odmah" && (
+          <div className="w-full flex justify-center my-2">
+            <div className="flex space-x-4 p-4">
+              <span className="text-yellow-400 px-4 py-2 rounded bg-gray-800">
+                Procijenjeno vrijeme do odredišta:
+              </span>
+              <span className="text-white border-1 border-yellow-400 px-4 py-2 rounded bg-gray-800">
+                20 minuta
+              </span>
+            </div>
+          </div>
+        )}
+        {/* Naruci taxi button */}
+        {stanje == 0 && (
+          <div className="w-full flex justify-center mt-[20px]">
+            <button className="" onClick={stateToOne}>
+              Nađi taxi
             </button>
-          </Link>
-        </div>
-      )}
-      {/* Feedback */}
-      {stanje == 3 && (
-        <>
-          <div className="w-full flex justify-center text-white" style={{ marginTop: '2cm'}}>
-            <h1>Hvala što ste koristili JaBiHTaxi!</h1>
           </div>
-          <div className="w-full flex justify-center text-white">
-            Ocijenite vaše iskustvo:
+        )}
+        {/* Tekst o neispravnom unosu */}
+        {stanje == 0 && !inputValid && (
+          <div className="w-full flex justify-center py-4">
+            <span className="text-red-500">Molimo unesite podatke.</span>
           </div>
-          <div className="w-full flex justify-center">
-            <ReactStars count={5} size={24} color2={"#ffd700"} />
-          </div>
-        </>
-      )}
-      {/* divider */}
-      {stanje == 3 && (
-        <div className="flex w-full flex-col">
-          <div className="divider"></div>
-        </div>
-      )}
-      {/* Plaćanje karticom */}
-      {stanje == 3 && odabirPlacanja == "kartica" && (
-  <>
-    {/* Center the entire section */}
-    <div className="w-full flex justify-center flex-col items-center">
-      {/* Card Number */}
-      <div className="flex space-x-4 p-4 items-center">
-        <span className="bg-black text-yellow-400 px-4 py-2 rounded w-35 bg-gray-800">
-          Broj kartice:
-        </span>
-        <input
-          type="text"
-          placeholder="XXXXXXXXX"
-          className="input input-bordered input-warning w-40 text-center"
-          value={brojKartice}
-          onChange={(event) => handleInput(event, setBrojKartice)}
-        />
-      </div>
-      {!brojKarticeValid && (
-        <div className="flex space-x-4 px-24">
-          <span className="text-red-500">
-            Molimo unesite ispravan broj kartice. (9 brojeva)
-          </span>
-        </div>
-      )}
-    </div>
-
-    {/* Expiry Date */}
-    <div className="w-full flex justify-center flex-col items-center">
-      <div className="flex space-x-4 p-4 items-center">
-        <span className="text-yellow-400 px-4 py-2 rounded w-35 bg-gray-800">
-          Datum isteka:
-        </span>
-        <input
-          type="text"
-          placeholder="YY/MM"
-          className="input input-bordered input-warning w-40 text-center"
-          value={datumIsteka}
-          onChange={(event) => handleInput(event, setDatumIsteka)}
-        />
-      </div>
-      {!datumIstekaValid && (
-        <div className="flex space-x-4 px-24">
-          <span className="text-red-500">
-            Molimo unesite ispravan datum isteka. (YY/MM format)
-          </span>
-        </div>
-      )}
-    </div>
-
-    {/* CVC */}
-    <div className="w-full flex justify-center flex-col items-center">
-      <div className="flex space-x-4 p-4 items-center">
-        <span className="text-yellow-400 px-4 py-2 rounded w-18 bg-gray-800">
-          CVC:
-        </span>
-        <input
-          type="text"
-          placeholder="XXX"
-          className="input input-bordered input-warning w-20 text-center"
-          value={cvc}
-          onChange={(event) => handleInput(event, setCvc)}
-        />
-      </div>
-      {!cvcValid && (
-        <div className="flex space-x-4 px-24">
-          <span className="text-red-500">
-            Molimo unesite ispravan CVC. (3 broja)
-          </span>
-        </div>
-      )}
-    </div>
-
-    {/* Payment Button */}
-    <div className="w-full flex justify-center">
-      <Link href="/korisnik">
-        <button className="my-5" onClick={handlePlacanje}>
-          Uplati
-        </button>
-      </Link>
-    </div>
-  </>
-)}
-
-      {/* Plaćanje gotovinom ili kreditima */}
-      {stanje == 3 &&
-        (odabirPlacanja == "gotovina" || odabirPlacanja == "krediti") && (
+        )}
+        {/* Otkazi voznju */}
+        {stanje == 1 && (
           <>
             <div className="w-full flex justify-center">
-              <Link href="/korisnik">
-                <button
-                  className="my-5"
-                  onClick={handlePovratak}
+              <button className="my-5 error-button" onClick={stateToZero}>
+                Otkaži vožnju
+              </button>
+            </div>
+          </>
+        )}
+        {/* Prihvati voznju konačno*/}
+        {stanje == 1.5 && (
+          <>
+            <div className="w-full flex justify-center space-x-10">
+              {localStorage.getItem("currentUser") !== "None" ? (
+                <div
+                  className="my-4 tooltip tooltip-open tooltip-error tooltip-bottom z-0"
+                  data-tip="Prihvatanje vožnje plaćate sa 2 kredita"
                 >
-                  Povratak na glavni ekran
+                  <button className="my-5" onClick={stateToTwo}>
+                    Prihvati vožnju
+                  </button>
+                </div>
+              ) : (
+                <div
+                  className="my-4 z-0"
+                  data-tip="Prihvatanje vožnje plaćate sa 2 kredita"
+                >
+                  <button className="my-5" onClick={stateToTwo}>
+                    Prihvati vožnju
+                  </button>
+                </div>
+              )}
+              <button className="mx-5 my-9 error-button" onClick={stateToZero}>
+                Otkaži vožnju
+              </button>
+            </div>
+          </>
+        )}
+        {/* Trenutna lokacija taxija button */}
+        {stanje == 2 && tipVoznje == "Odmah" && (
+          <div className="w-full flex justify-center items-center">
+            <Link href="/korisnik/taxi-trenutna-lokacija">
+              <button className="my-2 flex items-center space-x-2 bg-[#fcd34d] text-[#212121] px-4 py-2 rounded cursor-pointer font-bold transition-all duration-300 ease-in-out">
+                <span>Trenutna lokacija taxija</span>
+              </button>
+            </Link>
+            {/* Add Taxi Logo next to the button */}
+          </div>
+        )}
+
+        {stanje == 2 && tipVoznje == "Odmah" && (
+          <div className="w-full flex justify-center">
+            <button className="mt-4 error-button" onClick={stateToZero}>
+              Otkaži taxi
+            </button>
+          </div>
+        )}
+
+        {/* Zavrsi voznju i odabir placanja */}
+        {stanje == 2 && tipVoznje == "Odmah" && (
+          <>
+            <div className="w-full flex justify-center space-x-10">
+              <button
+                className="my-5"
+                onClick={() =>
+                  document.getElementById("my_modal_3").showModal()
+                }
+              >
+                Završi vožnju
+              </button>
+            </div>
+
+            <dialog id="my_modal_3" className="modal ">
+              <div className="modal-box w-[450px] bg-gray-900">
+                <form method="dialog">
+                  <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                    ✕
+                  </button>
+                </form>
+                <span className="w-full flex justify-center text-yellow-500 px-2 py-2 rounded">
+                  Odaberi način plaćanja:
+                </span>
+
+                <div className="w-full flex justify-center">
+                  <button
+                    className="my-5 mx-3 btn btn-success"
+                    onClick={() => {
+                      handleOdabirPlacanja("gotovina");
+                    }}
+                  >
+                    Gotovina
+                  </button>
+
+                  {localStorage.getItem("currentUser") === "None" ? (
+                    " "
+                  ) : (
+                    <button
+                      className="my-5 mx-3 btn btn-warning"
+                      onClick={() => {
+                        handleOdabirPlacanja("krediti");
+                      }}
+                    >
+                      Krediti u aplikaciji
+                    </button>
+                  )}
+
+                  <button
+                    className="my-5 mx-3 btn btn-info"
+                    onClick={() => {
+                      handleOdabirPlacanja("kartica");
+                    }}
+                  >
+                    Kartica
+                  </button>
+                </div>
+              </div>
+            </dialog>
+          </>
+        )}
+        {/* Povratak na glavni ekran rezervacija */}
+        {stanje == 2 && tipVoznje == "Rezervacija" && (
+          <div className="w-full flex justify-center">
+            <Link href="/korisnik">
+              <button className="my-5" onClick={handlePovratak}>
+                Povratak na glavni ekran
+              </button>
+            </Link>
+          </div>
+        )}
+        {/* Feedback */}
+        {stanje == 3 && (
+          <>
+            <div
+              className="w-full flex justify-center text-white"
+              style={{ marginTop: "2cm" }}
+            >
+              <h1>Hvala što ste koristili JaBiHTaxi!</h1>
+            </div>
+            <div className="w-full flex justify-center text-white">
+              Ocijenite vaše iskustvo:
+            </div>
+            <div className="w-full flex justify-center">
+              <ReactStars count={5} size={24} color2={"#ffd700"} />
+            </div>
+          </>
+        )}
+        {/* divider */}
+        {stanje == 3 && (
+          <div className="flex w-full flex-col">
+            <div className="divider"></div>
+          </div>
+        )}
+        {/* Plaćanje karticom */}
+        {stanje == 3 && odabirPlacanja == "kartica" && (
+          <>
+            {/* Center the entire section */}
+            <div className="w-full flex justify-center flex-col items-center">
+              {/* Card Number */}
+              <div className="flex space-x-4 p-4 items-center">
+                <span className="bg-black text-yellow-400 px-4 py-2 rounded w-35 bg-gray-800">
+                  Broj kartice:
+                </span>
+                <input
+                  type="text"
+                  placeholder="XXXXXXXXX"
+                  className="input input-bordered input-warning w-40 text-center bg-gray-800"
+                  value={brojKartice}
+                  onChange={(event) => handleInput(event, setBrojKartice)}
+                />
+              </div>
+              {!brojKarticeValid && (
+                <div className="flex space-x-4 px-24">
+                  <span className="text-red-500">
+                    Molimo unesite ispravan broj kartice. (9 brojeva)
+                  </span>
+                </div>
+              )}
+            </div>
+
+            {/* Expiry Date */}
+            <div className="w-full flex justify-center flex-col items-center">
+              <div className="flex space-x-4 p-4 items-center">
+                <span className="text-yellow-400 px-4 py-2 rounded w-35 bg-gray-800">
+                  Datum isteka:
+                </span>
+                <input
+                  type="text"
+                  placeholder="YY/MM"
+                  className="input input-bordered input-warning w-40 text-center bg-gray-800"
+                  value={datumIsteka}
+                  onChange={(event) => handleInput(event, setDatumIsteka)}
+                />
+              </div>
+              {!datumIstekaValid && (
+                <div className="flex space-x-4 px-24">
+                  <span className="text-red-500">
+                    Molimo unesite ispravan datum isteka. (YY/MM format)
+                  </span>
+                </div>
+              )}
+            </div>
+
+            {/* CVC */}
+            <div className="w-full flex justify-center flex-col items-center">
+              <div className="flex space-x-4 p-4 items-center">
+                <span className="text-yellow-400 px-4 py-2 rounded w-18 bg-gray-800">
+                  CVC:
+                </span>
+                <input
+                  type="text"
+                  placeholder="XXX"
+                  className="input input-bordered input-warning w-20 text-center bg-gray-800"
+                  value={cvc}
+                  onChange={(event) => handleInput(event, setCvc)}
+                />
+              </div>
+              {!cvcValid && (
+                <div className="flex space-x-4 px-24">
+                  <span className="text-red-500">
+                    Molimo unesite ispravan CVC. (3 broja)
+                  </span>
+                </div>
+              )}
+            </div>
+
+            {/* Payment Button */}
+            <div className="w-full flex justify-center">
+              <Link href="/korisnik">
+                <button className="my-5" onClick={handlePlacanje}>
+                  Uplati
                 </button>
               </Link>
             </div>
           </>
         )}
-        </div>
+
+        {/* Plaćanje gotovinom ili kreditima */}
+        {stanje == 3 &&
+          (odabirPlacanja == "gotovina" || odabirPlacanja == "krediti") && (
+            <>
+              <div className="w-full flex justify-center">
+                <Link href="/korisnik">
+                  <button className="my-5" onClick={handlePovratak}>
+                    Povratak na glavni ekran
+                  </button>
+                </Link>
+              </div>
+            </>
+          )}
+      </div>
     </>
   );
 }

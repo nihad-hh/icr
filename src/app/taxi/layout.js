@@ -21,7 +21,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <div className="flex items-center justify-center min-h-screen bg-black">
-          <div className="w-[500px] h-[1200px] border-4 border-gray-200 mx-auto bg-gray-900 rounded-lg shadow-lg transition-all duration-300 hover:border-gray-200 hover:scale-105">
+          <div className="w-[500px] h-[1200px] border-4 border-gray-200 mx-auto bg-gray-900 rounded-lg shadow-lg transition-all duration-300">
             {children}
           </div>
         </div>

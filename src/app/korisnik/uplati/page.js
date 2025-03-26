@@ -75,16 +75,16 @@ export default function Home() {
 
       {/* Plaćanje karticom */}
       <>
-      <div className="w-full flex justify-center flex-col mt-16 items-center">
-      <div className="flex space-x-4 p-4 items-center px-20">
-          <span className="text-yellow-400 px-4 py-2 rounded w-35 bg-gray-800">
+        <div className="w-full flex justify-center flex-col mt-16 items-center">
+          <div className="flex space-x-4 p-4 items-center px-20">
+            <span className="text-yellow-400 px-4 py-2 rounded w-35 bg-gray-800">
               Iznos:
             </span>
             <span className="">
               <input
                 type="text"
-                placeholder="Unesi"
-                className="input input-bordered input-warning w-20 text-center"
+                placeholder="Unesi iznos"
+                className="input input-bordered input-warning w-40 text-center bg-gray-800"
                 value={iznos}
                 onChange={(event) => handleInput(event, setIznos)}
               />
@@ -101,20 +101,20 @@ export default function Home() {
         </div>
 
         <div className="w-full flex justify-center flex-col items-center">
-        <div className="flex space-x-4 p-4 items-center px-20">
-        <span className="text-yellow-400 px-4 py-2 rounded w-32 bg-gray-800">
-            Broj kartice:
-          </span>
-          <span className="">
-            <input
-              type="text"
-              placeholder="XXXXXXXXX"
-              className="input input-bordered input-warning w-40 text-center"
-              value={brojKartice}
-              onChange={(event) => handleInput(event, setBrojKartice)}
-            />
-          </span>
-        </div>
+          <div className="flex space-x-4 p-4 items-center px-20">
+            <span className="text-yellow-400 px-4 py-2 rounded w-32 bg-gray-800">
+              Broj kartice:
+            </span>
+            <span className="">
+              <input
+                type="text"
+                placeholder="XXXXXXXXX"
+                className="input input-bordered input-warning w-40 text-center bg-gray-800"
+                value={brojKartice}
+                onChange={(event) => handleInput(event, setBrojKartice)}
+              />
+            </span>
+          </div>
         </div>
 
         {!brojKarticeValid && (
@@ -126,15 +126,15 @@ export default function Home() {
         )}
 
         <div className="w-full flex justify-center flex-col items-center">
-        <div className="flex space-x-4 p-4 items-center px-20">
-          <span className="text-yellow-400 px-4 py-2 rounded w-36 bg-gray-800">
+          <div className="flex space-x-4 p-4 items-center px-20">
+            <span className="text-yellow-400 px-4 py-2 rounded w-36 bg-gray-800">
               Datum isteka:
             </span>
             <span className="">
               <input
                 type="text"
                 placeholder="YY/MM"
-                className="input input-bordered input-warning w-28 text-center"
+                className="input input-bordered input-warning w-28 text-center bg-gray-800"
                 value={datumIsteka}
                 onChange={(event) => handleInput(event, setDatumIsteka)}
               />
@@ -151,15 +151,15 @@ export default function Home() {
         </div>
 
         <div className="w-full flex justify-center flex-col items-center">
-        <div className="flex space-x-4 p-4 items-center px-20">
-          <span className="text-yellow-400 px-4 py-2 rounded w-18 bg-gray-800">
+          <div className="flex space-x-4 p-4 items-center px-20">
+            <span className="text-yellow-400 px-4 py-2 rounded w-18 bg-gray-800">
               CVC:
             </span>
             <span className="">
               <input
                 type="text"
                 placeholder="XXX"
-                className="input input-bordered input-warning w-20 text-center"
+                className="input input-bordered input-warning w-20 text-center bg-gray-800"
                 value={cvc}
                 onChange={(event) => handleInput(event, setCvc)}
               />

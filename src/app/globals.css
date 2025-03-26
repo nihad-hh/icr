@@ -52,7 +52,7 @@ nextjs-portal {
 /* Exclude the eye toggle button and error button from the global button styles */
 button:not(.eye-toggle-btn):not(.error-button) {
   background-color: #fcd34d; /* Default yellow background */
-  color: #212121;  /* Text color based on the current foreground variable */
+  color: #212121; /* Text color based on the current foreground variable */
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 0.375rem; /* Optional: Rounded corners */
@@ -69,16 +69,12 @@ button:not(.eye-toggle-btn):not(.error-button) {
   transform: none; /* No scale transformation */
 }
 
-/* General hover effect for all other buttons */
-button:hover {
-  background-color: #ffd119; /* Lighter yellow for hover effect */
-  transform: scale(1.05); /* Slightly enlarges button on hover */
-}
-
 /* Apply custom styles to the eye toggle buttons */
 .eye-toggle-btn {
   background-color: transparent; /* Transparent background */
-  color: var(--foreground); /* Set the icon color based on the current foreground */
+  color: var(
+    --foreground
+  ); /* Set the icon color based on the current foreground */
   padding: 0; /* Remove padding for the eye button */
   border: none;
   cursor: pointer;
@@ -98,7 +94,7 @@ button:hover {
 
 /* Error button styles */
 .error-button {
-  background-color: #fcd34d; /* Default yellow background */
+  background-color: #f87171; /* Default yellow background */
   color: #212121; /* Text color based on the current foreground variable */
   padding: 0.5rem 1rem;
   border: none;
@@ -106,12 +102,4 @@ button:hover {
   cursor: pointer;
   font-size: 1rem;
   font-weight: bold;
-  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition */
 }
-
-/* Error button hover effect */
-.error-button:hover {
-  background-color: #f87171; /* Red background on hover */
-  transform: scale(1.05); /* Slightly enlarges button on hover */
-}
-
