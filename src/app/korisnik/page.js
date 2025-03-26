@@ -482,7 +482,7 @@ export default function Home() {
         {(stanje == 2 || stanje == 1.5) && (
           <div className="w-full flex justify-center py-4">
             {tipVoznje == "Odmah" && (
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-4">
                 <span className="text-yellow-400 px-2 py-2 rounded bg-gray-800">
                   Reg. oznake:
                 </span>
@@ -717,7 +717,7 @@ export default function Home() {
                 <input
                   type="text"
                   placeholder="XXXXXXXXX"
-                  className="input input-bordered input-warning w-40 text-center bg-gray-800"
+                  className="input input-bordered input-warning w-40 text-center bg-gray-800 text-white"
                   value={brojKartice}
                   onChange={(event) => handleInput(event, setBrojKartice)}
                 />
@@ -740,7 +740,7 @@ export default function Home() {
                 <input
                   type="text"
                   placeholder="YY/MM"
-                  className="input input-bordered input-warning w-40 text-center bg-gray-800"
+                  className="input input-bordered input-warning w-40 text-center bg-gray-800 text-white"
                   value={datumIsteka}
                   onChange={(event) => handleInput(event, setDatumIsteka)}
                 />
@@ -757,13 +757,13 @@ export default function Home() {
             {/* CVC */}
             <div className="w-full flex justify-center flex-col items-center">
               <div className="flex space-x-4 p-4 items-center">
-                <span className="text-yellow-400 px-4 py-2 rounded w-18 bg-gray-800">
+                <span className="text-yellow-400 px-4 py-2 rounded w-18 bg-gray-800 ">
                   CVC:
                 </span>
                 <input
                   type="text"
                   placeholder="XXX"
-                  className="input input-bordered input-warning w-20 text-center bg-gray-800"
+                  className="input input-bordered input-warning w-20 text-center bg-gray-800 text-white"
                   value={cvc}
                   onChange={(event) => handleInput(event, setCvc)}
                 />

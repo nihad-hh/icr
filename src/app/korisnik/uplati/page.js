@@ -84,7 +84,7 @@ export default function Home() {
               <input
                 type="text"
                 placeholder="Unesi iznos"
-                className="input input-bordered input-warning w-40 text-center bg-gray-800"
+                className="input input-bordered input-warning w-40 text-center bg-gray-800 text-white"
                 value={iznos}
                 onChange={(event) => handleInput(event, setIznos)}
               />
@@ -109,7 +109,7 @@ export default function Home() {
               <input
                 type="text"
                 placeholder="XXXXXXXXX"
-                className="input input-bordered input-warning w-40 text-center bg-gray-800"
+                className="input input-bordered input-warning w-40 text-center bg-gray-800 text-white"
                 value={brojKartice}
                 onChange={(event) => handleInput(event, setBrojKartice)}
               />
@@ -134,7 +134,7 @@ export default function Home() {
               <input
                 type="text"
                 placeholder="YY/MM"
-                className="input input-bordered input-warning w-28 text-center bg-gray-800"
+                className="input input-bordered input-warning w-28 text-center bg-gray-800 text-white"
                 value={datumIsteka}
                 onChange={(event) => handleInput(event, setDatumIsteka)}
               />
@@ -159,7 +159,7 @@ export default function Home() {
               <input
                 type="text"
                 placeholder="XXX"
-                className="input input-bordered input-warning w-20 text-center bg-gray-800"
+                className="input input-bordered input-warning w-20 text-center bg-gray-800 text-white"
                 value={cvc}
                 onChange={(event) => handleInput(event, setCvc)}
               />

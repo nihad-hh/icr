@@ -38,7 +38,7 @@ export default function Navbar() {
                 />
               </svg>
             </summary>
-            <ul className="menu dropdown-content rounded-box z-[1] w-52 p-2 shadow bg-gray-900">
+            <ul className="menu dropdown-content rounded-box z-[1] w-52 p-2 shadow bg-gray-900 text-white">
               <li>
                 {currentUser != "None" && (
                   <Link

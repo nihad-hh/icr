@@ -45,7 +45,7 @@ export default function Home() {
       </div>
       <div className="flex min-w-[480px] flex-col mx-2">
         <textarea
-          className="textarea textarea-warning h-64 bg-white"
+          className="textarea textarea-warning h-64 bg-white text-gray-900"
           placeholder="Ono što želim da podijelim"
         ></textarea>
       </div>

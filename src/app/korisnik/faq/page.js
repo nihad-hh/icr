@@ -8,10 +8,10 @@ export default function Faq() {
       <Navbar />
       {/* Feedback */}{" "}
       <>
-        <h1 className="flex justify-center py-6 text-2xl">
+        <h1 className="flex justify-center py-6 text-2xl text-white">
           Često postavljena pitanja
         </h1>
-        <div className="px-4 bg-gray-900">
+        <div className="px-4 bg-gray-900 text-white">
           <div className="collapse bg-gray-900">
             <input type="radio" name="my-accordion-1" defaultChecked />
             <div className="collapse-title text-xl font-medium">
