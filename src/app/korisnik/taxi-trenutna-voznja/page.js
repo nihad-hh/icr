@@ -28,7 +28,10 @@ export default function Home() {
     <>
       <Navbar />
       {/* Adresa polazišta */}
-      <div className="w-full flex justify-start" style={{ marginTop: '1cm', marginLeft: '70px' }}>
+      <div
+        className="w-full flex justify-start"
+        style={{ marginTop: "1cm", marginLeft: "70px" }}
+      >
         <div className="flex space-x-4 p-3">
           <span className="bg-black text-yellow-400 px-4 py-2 rounded bg-gray-800">
             Adresa polazišta:
@@ -40,7 +43,7 @@ export default function Home() {
       </div>
 
       {/* Adresa odredišta */}
-      <div className="w-full flex justify-start" style={{marginLeft: '70px' }}>
+      <div className="w-full flex justify-start" style={{ marginLeft: "70px" }}>
         <div className="flex space-x-4 p-3">
           <span className="bg-black text-yellow-400 px-4 py-2 rounded bg-gray-800">
             Adresa odredišta:
@@ -51,7 +54,7 @@ export default function Home() {
         </div>
       </div>
       {/* dijeljenje voznje */}
-      <div className="w-full flex justify-start" style={{marginLeft: '70px' }}>
+      <div className="w-full flex justify-start" style={{ marginLeft: "70px" }}>
         <div className="flex space-x-4 p-3">
           <span className="bg-gray-800 text-yellow-400 px-4 py-2 rounded">
             Dijeljenje vožnje:
@@ -60,48 +63,51 @@ export default function Home() {
           <input
             type="radio"
             name="radio-6"
-            className="radio radio-warning"
+            className="radio radio-warning my-2"
             id="Ne"
             disabled={true}
             defaultChecked
           />
-          <label className="text-yellow-400" htmlFor="Ne">
+          <label className="text-white py-2" htmlFor="Ne">
             Ne
           </label>
           <input
             type="radio"
             id="Da"
             name="radio-6"
-            className="radio radio-warning"
+            className="radio radio-warning my-2"
             disabled={true}
           />
-          <label className="text-yellow-400" htmlFor="Da">
+          <label className="text-white py-2" htmlFor="Da">
             Da
           </label>
         </div>
       </div>
       {/* Procijenjeno vrijeme dolaska taxija */}
-      <div className="w-full flex justify-start mt-4" style={{marginLeft: '40px' }}>
-          <div className="flex space-x-4 p-3">
-            <span className="text-yellow-400 px-4 py-2 rounded bg-gray-800">
-              Procijenjeno vrijeme dolaska:
-            </span>
-            <span className="text-yellow-400 border-1 border-yellow-500 px-4 py-2 rounded bg-gray-800">
-              5 minuta
-            </span>
-          </div>
+      <div
+        className="w-full flex justify-start mt-4"
+        style={{ marginLeft: "40px" }}
+      >
+        <div className="flex space-x-4 p-3">
+          <span className="text-yellow-400 px-4 py-2 rounded bg-gray-800">
+            Procijenjeno vrijeme dolaska:
+          </span>
+          <span className="text-white border-1 border-yellow-500 px-4 py-2 rounded bg-gray-800">
+            5 minuta
+          </span>
         </div>
+      </div>
       {/* Procijenjeno vrijeme do odredišta */}
-      <div className="w-full flex justify-start" style={{marginLeft: '40px' }}>
-          <div className="flex space-x-4 p-3">
-            <span className="text-yellow-400 px-4 py-2 rounded bg-gray-800">
-              Procijenjeno vrijeme do odredišta:
-            </span>
-            <span className="text-yellow-400 border-1 border-yellow-400 px-4 py-2 rounded bg-gray-800">
-              20 minuta
-            </span>
-          </div>
+      <div className="w-full flex justify-start" style={{ marginLeft: "40px" }}>
+        <div className="flex space-x-4 p-3">
+          <span className="text-yellow-400 px-4 py-2 rounded bg-gray-800">
+            Procijenjeno vrijeme do odredišta:
+          </span>
+          <span className="text-white border-1 border-yellow-400 px-4 py-2 rounded bg-gray-800">
+            20 minuta
+          </span>
         </div>
+      </div>
       {/* Otkazi voznju */}
       <>
         <Link href="/taxi">

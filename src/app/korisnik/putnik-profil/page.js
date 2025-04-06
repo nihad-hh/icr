@@ -145,11 +145,13 @@ export default function PutnikProfil() {
       </div>
       <hr class="border-t-4 border-gray-200 my-0" />
 
+      <div className="w-full flex justify-center">
+        <caption className="text-yellow-400 text-lg font-bold m-2">
+          Prethodno završene vožnje
+        </caption>
+      </div>
       <div className="overflow-auto" style={{ maxHeight: "276px" }}>
         <table className="table table-pin-rows z-0 text-white">
-          <caption className="text-yellow-400 text-lg font-bold p-2">
-            Prethodno završene vožnje
-          </caption>
           <thead>
             <tr className="bg-gray-200 text-gray-900">
               <th>Datum i vrijeme</th>
@@ -163,15 +165,16 @@ export default function PutnikProfil() {
       </div>
 
       <hr class="border-t-4 border-gray-200 my-0" />
-
+      <div className="w-full flex justify-center">
+        <caption className="text-yellow-400 text-lg font-bold m-2">
+          Rezervisane vožnje
+        </caption>
+      </div>
       <div className="overflow-auto" style={{ maxHeight: "276px" }}>
         <table
           id="tRezervisaneVoznje"
           className="table table-pin-rows text-white"
         >
-          <caption className="text-yellow-400 text-lg font-bold p-2">
-            Rezervisane vožnje
-          </caption>
           <thead>
             <tr className="bg-gray-200 text-gray-900">
               <th>Datum i vrijeme</th>

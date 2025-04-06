@@ -101,7 +101,7 @@ const HomePage = () => {
           <CircleX onClick={handleClear} />
         </label>
         <Link href="/korisnik">
-          <button className="" onClick={performAction}>
+          <button className="my-1" onClick={performAction}>
             Potvrdi
           </button>
         </Link>

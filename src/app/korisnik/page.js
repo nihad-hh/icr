@@ -17,7 +17,7 @@ export default function Home() {
 
   const [stanje, setStanje] = useState(stanjeFromLocal ? stanjeFromLocal : 0);
 
-  const [vrijeme, setVrijeme] = useState("");
+  const [vrijeme, setVrijeme] = useState(localStorage.getItem("vrijeme") || "");
 
   const [inputValid, setInputValid] = useState(true);
 
@@ -85,8 +85,7 @@ export default function Home() {
       clearTimeout(timeoutPrihvatanjeVoznje);
       timeoutPrihvatanjeVoznje = null;
     }
-    localStorage.setItem("tipVoznje", "Odmah");
-    setTipVoznje("Odmah");
+
     localStorage.setItem("stanje", 0);
     setStanje(0);
 
@@ -108,7 +107,14 @@ export default function Home() {
   };
 
   // date picker
-  const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(
+    new Date(
+      localStorage.getItem("datum") === null
+        ? "2025-04-06T00:00:00.000Z"
+        : JSON.parse(localStorage.getItem("datum"))
+    )
+  );
+
   const ExampleCustomInput = forwardRef(
     ({ value, onClick, className }, ref) => (
       <button className="bg-gray-800" onClick={onClick} ref={ref}>
@@ -161,6 +167,10 @@ export default function Home() {
 
     localStorage.setItem("tipVoznje", "Odmah");
     setTipVoznje("Odmah");
+
+    localStorage.setItem("dijeljenjeVoznje", "Ne");
+    setDijeljenjeVoznje("Ne");
+
     localStorage.setItem("stanje", 0);
     localStorage.setItem("polaziste", "Najcesce polaziste");
     localStorage.setItem("odrediste", "Najcesce odrediste");
@@ -339,7 +349,7 @@ export default function Home() {
                   id="Ne"
                   onChange={handleChangeDijeljenje}
                   disabled={stanje > 2}
-                  defaultChecked
+                  checked={dijeljenjeVoznje === "Ne"}
                   value="Ne"
                 />
               </div>
@@ -355,6 +365,7 @@ export default function Home() {
                   className="radio radio-warning"
                   disabled={stanje > 2}
                   onChange={handleChangeDijeljenje}
+                  checked={dijeljenjeVoznje === "Da"}
                   value="Da"
                 />
               </div>
@@ -381,7 +392,7 @@ export default function Home() {
                   id="Odmah"
                   onChange={handleChangeTip}
                   disabled={stanje > 2}
-                  defaultChecked
+                  checked={tipVoznje === "Odmah"}
                   value="Odmah"
                 />
               </div>
@@ -397,6 +408,7 @@ export default function Home() {
                   className="radio radio-warning"
                   disabled={stanje > 2}
                   onChange={handleChangeTip}
+                  checked={tipVoznje === "Rezervacija"}
                   value="Rezervacija"
                 />
               </div>
@@ -429,14 +441,22 @@ export default function Home() {
         {/* Date Picker */}
         {tipVoznje === "Rezervacija" && (
           <>
-            <div className="w-full h-full flex items-center justify-center">
+            <div
+              className={`w-full h-full flex items-center justify-center ${
+                stanje >= 1 ? "custom-datum" : ""
+              }`}
+            >
               <div className="flex space-x-4 p-2">
                 <span className="bg-black text-yellow-400 px-4 py-2 rounded bg-gray-800">
                   Datum:
                 </span>
                 <DatePicker
+                  className="green"
                   selected={startDate}
-                  onChange={(date) => setStartDate(date)}
+                  onChange={(date) => {
+                    setStartDate(date);
+                    localStorage.setItem("datum", JSON.stringify(date));
+                  }}
                   disabled={stanje != 0}
                   customInput={<ExampleCustomInput className="bg-gray-800" />}
                 />
@@ -449,12 +469,13 @@ export default function Home() {
                 </span>
                 <input
                   disabled={stanje != 0}
-                  className="bg-gray-800 text-white px-4"
+                  className="bg-gray-800 text-white px-4 rounded"
                   aria-label="Time"
                   type="time"
                   value={vrijeme}
                   onChange={(event) => {
                     console.log(event.target.value);
+                    localStorage.setItem("vrijeme", event.target.value);
                     setVrijeme(event.target.value);
                   }}
                 />
